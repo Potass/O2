@@ -1,18 +1,14 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
-        mavenCentral()
+        google()
         gradlePluginPortal()
+        mavenCentral()
     }
 }
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()
@@ -20,5 +16,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "O2Scratch"
-include(":app")
+include(":androidApp")
+include(":commonApp")
+include(":shared:logging")
+include(":shared:networking")
+include(":shared:common")
  

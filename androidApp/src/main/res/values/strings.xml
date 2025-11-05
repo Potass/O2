@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For android manifest purposes. See 'composeResources' directory in common app's 'commonMain' for all other strings. -->
+    <string name="general__app_name">O2 Scratch app</string>
+</resources>
