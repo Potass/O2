@@ -29,7 +29,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
+import cz.jvyh.o2.scratch.common.ui.activation.ActivationDestination
+import cz.jvyh.o2.scratch.common.ui.activation.ActivationScreen
 import cz.jvyh.o2.scratch.common.ui.main.MainDestination
+import cz.jvyh.o2.scratch.common.ui.main.MainScreen
+import cz.jvyh.o2.scratch.common.ui.scratch.ScratchDestination
+import cz.jvyh.o2.scratch.common.ui.scratch.ScratchScreen
 import cz.jvyh.o2.scratch.common.ui.theming.PlatformAppTheme
 import cz.jvyh.o2.scratch.shared.common.domain.AutoLevelAppDestinationToNavigate
 import cz.jvyh.o2.scratch.shared.common.domain.CommonImageVectorIconKey
@@ -97,14 +102,19 @@ actual fun AppContent(
                             startDestination = Destinations.default.route
                         ) {
                             composable(route = MainDestination.route) {
-//                                //MainScreen()
+                                MainScreen(
+                                    onScratchClicked = { navController.navigate(route = ScratchDestination.route) },
+                                    onActivateClicked = { navController.navigate(route = ActivationDestination.route) }
+                                )
                             }
 
-//                            composable(route = ScratchDestination.route) {
-//                                ScratchScreen(
-//                                    onNavigateClicked = { navController.navigate(route = .route) }
-//                                )
-//                            }
+                            composable(route = ScratchDestination.route) {
+                                ScratchScreen()
+                            }
+
+                            composable(route = ActivationDestination.route) {
+                                ActivationScreen()
+                            }
                         }
                     }
                 }
@@ -164,7 +174,9 @@ private fun NavHostController.navigateToStart() = popBackStack(Destinations.defa
 private object Destinations {
     val default = MainDestination
     val all: List<AppDestination<*>> = listOf(
-        MainDestination
+        MainDestination,
+        ScratchDestination,
+        ActivationDestination
     )
     val topLevel: List<AppDestination<*>> = listOf(
         MainDestination
