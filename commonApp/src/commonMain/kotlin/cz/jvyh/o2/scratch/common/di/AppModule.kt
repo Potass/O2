@@ -4,10 +4,13 @@ import co.touchlab.kermit.Logger
 import cz.jvyh.o2.scratch.common.platform.AppContentController
 import cz.jvyh.o2.scratch.common.platform.AppContentControllerImpl
 import cz.jvyh.o2.scratch.common.ui.AppContentViewModel
+import cz.jvyh.o2.scratch.common.ui.activation.ActivationViewModel
+import cz.jvyh.o2.scratch.common.ui.main.MainViewModel
 import cz.jvyh.o2.scratch.common.ui.resources.AppDrawableResourceIconProviderImpl
 import cz.jvyh.o2.scratch.common.ui.resources.AppImageVectorIconProviderImpl
 import cz.jvyh.o2.scratch.common.ui.resources.AppStringProviderImpl
 import cz.jvyh.o2.scratch.common.ui.resources.CommonDrawableResourceIconProviderImpl
+import cz.jvyh.o2.scratch.common.ui.scratch.ScratchViewModel
 import cz.jvyh.o2.scratch.shared.common.di.commonModule
 import cz.jvyh.o2.scratch.shared.common.ui.resources.AppDrawableResourceIconProvider
 import cz.jvyh.o2.scratch.shared.common.ui.resources.AppImageVectorIconProvider
@@ -30,6 +33,12 @@ internal val appModule = module {
     // App content
     singleOf(::AppContentControllerImpl) { bind<AppContentController>() }
     viewModel { AppContentViewModel(get<Logger>().withClassNameTag<AppContentViewModel>(), get()) }
+    // Main screen
+    viewModel { MainViewModel(get<Logger>().withClassNameTag<MainViewModel>()) }
+    // Scratch screen
+    viewModel { ScratchViewModel(get<Logger>().withClassNameTag<ScratchViewModel>()) }
+    // Activation screen
+    viewModel { ActivationViewModel(get<Logger>().withClassNameTag<ActivationViewModel>()) }
     // Resources
     single<AppStringProvider> { AppStringProviderImpl(get<Logger>().withClassNameTag<AppStringProviderImpl>(), get()) }
     single<AppImageVectorIconProvider> { AppImageVectorIconProviderImpl(get()) }
