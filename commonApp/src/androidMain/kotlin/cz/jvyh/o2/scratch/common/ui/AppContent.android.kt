@@ -96,7 +96,7 @@ actual fun AppContent(
                             navController = navController,
                             startDestination = Destinations.default.route
                         ) {
-                            composable(route = "MainDestination.route") {
+                            composable(route = MainDestination.route) {
 //                                //MainScreen()
                             }
 
@@ -109,7 +109,6 @@ actual fun AppContent(
                     }
                 }
 
-                // We need graph to already exist, therefore order is important.
                 runCatching {
                     when (val destinationToNavigate = state.destinationToNavigate) {
                         is TopLevelAppDestinationToNavigate -> navController.navigateSingleTopTo(route = destinationToNavigate.destination.route)
