@@ -17,7 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import co.touchlab.kermit.Logger
+import cz.jvyh.o2.scratch.common.domain.AppStringKey
+import cz.jvyh.o2.scratch.common.domain.shared.ActivationFailedDialogId
 import cz.jvyh.o2.scratch.shared.common.domain.DialogId
+import cz.jvyh.o2.scratch.shared.common.ui.composables.AppAlertDialog
 import cz.jvyh.o2.scratch.shared.common.ui.resources.AppStringProvider
 import cz.jvyh.o2.scratch.shared.logging.infrastructure.LOGGER_SIMPLE_NAMED_FACTORY
 import kotlinx.coroutines.launch
@@ -79,7 +82,10 @@ fun AppDialog(
 ) {
     if (isProcessing.not()) {
         when (id) {
-            // Implement if needed
+            ActivationFailedDialogId -> AppAlertDialog(
+                bodyText = AppStringKey.ActivationDialogMsgActivationFailed,
+                onConfirm = onDismiss
+            )
         }
     }
 }

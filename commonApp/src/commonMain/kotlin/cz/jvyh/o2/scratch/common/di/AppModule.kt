@@ -59,7 +59,7 @@ internal val appModule = module {
     single<CodeFlowProvider> { get<ScratchControllerImpl>() }
     // Activation
     viewModelOf(::ActivationViewModel)
-    single<ActivationControllerImpl> { ActivationControllerImpl(get(), get(), get(), get()) }
+    single<ActivationControllerImpl> { ActivationControllerImpl(get(), get(), get(), get(), get()) }
     single<ActivationController> { get<ActivationControllerImpl>() }
     single<IsActiveValueProvider> { get<ActivationControllerImpl>() }
     single<IsActiveFlowProvider> { get<ActivationControllerImpl>() }

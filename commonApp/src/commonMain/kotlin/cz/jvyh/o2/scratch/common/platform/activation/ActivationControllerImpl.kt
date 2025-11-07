@@ -1,6 +1,7 @@
 package cz.jvyh.o2.scratch.common.platform.activation
 
 import cz.jvyh.o2.scratch.common.domain.activation.ActivationRequest
+import cz.jvyh.o2.scratch.common.domain.shared.ActivationFailedDialogId
 import cz.jvyh.o2.scratch.common.platform.shared.CodeValueProvider
 import cz.jvyh.o2.scratch.common.platform.shared.IsActiveFlowProvider
 import cz.jvyh.o2.scratch.common.platform.shared.IsActiveValueProvider
@@ -8,6 +9,7 @@ import cz.jvyh.o2.scratch.shared.common.infrastructure.BooleanDefaults
 import cz.jvyh.o2.scratch.shared.common.infrastructure.DispatcherProvider
 import cz.jvyh.o2.scratch.shared.common.infrastructure.orDefault
 import cz.jvyh.o2.scratch.shared.common.platform.BusyIndicatorController
+import cz.jvyh.o2.scratch.shared.common.platform.DialogToShowUpdater
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +23,7 @@ internal class ActivationControllerImpl(
     private val processor: ActivationProcessor,
     private val busyIndicatorController: BusyIndicatorController,
     private val codeValueProvider: CodeValueProvider,
+    private val dialogToShowUpdater: DialogToShowUpdater,
 ) : ActivationController, CoroutineScope, IsActiveFlowProvider, IsActiveValueProvider {
     private val _isActiveFlow = MutableStateFlow(BooleanDefaults.DEFAULT_VALUE)
     override val isActiveFlow: Flow<Boolean> = _isActiveFlow
@@ -33,9 +36,7 @@ internal class ActivationControllerImpl(
                 processor.activate(ActivationRequest(codeValueProvider.code)).let { r ->
                     val isActive = r?.isActive.orDefault()
                     updateIsActive(isActive)
-                    if (isActive.not()) {
-                        // TODO O2 - show error dialog - "Could not activate the scratch card."
-                    }
+                    if (isActive.not()) dialogToShowUpdater.updateDialogToShow(ActivationFailedDialogId)
                 }
             }
         }
