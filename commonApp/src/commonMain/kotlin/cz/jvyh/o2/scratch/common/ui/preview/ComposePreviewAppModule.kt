@@ -24,6 +24,7 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val composePreviewAppModule = module {
@@ -42,7 +43,7 @@ val composePreviewAppModule = module {
     viewModel { ScratchViewModel(get<Logger>().withClassNameTag<ScratchViewModel>(), get()) }
     singleOf(::ScratchControllerImpl) { bind<ScratchController>() }
     // Activation
-    viewModel { ActivationViewModel(get<Logger>().withClassNameTag<ActivationViewModel>(), get()) }
+    viewModelOf(::ActivationViewModel)
     singleOf(::ActivationControllerImpl) { bind<ActivationController>() }
     factoryOf(::ActivationProcessorImpl) { bind<ActivationProcessor>() }
     // Resources
