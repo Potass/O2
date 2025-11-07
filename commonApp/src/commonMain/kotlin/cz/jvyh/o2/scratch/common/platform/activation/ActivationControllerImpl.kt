@@ -8,7 +8,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-// TODO - unit tests
+// TODO O2 - unit tests
 internal class ActivationControllerImpl(
     dispatcherProvider: DispatcherProvider,
     private val processor: ActivationProcessor,
@@ -20,7 +20,7 @@ internal class ActivationControllerImpl(
         launch {
             busyIndicatorController.coWith {
                 processor.activate(ActivationRequest("TODO_UUID"))
-                // TODO handle result; pass to Flow; or show error dialog
+                // TODO O2 - handle result; pass to Flow; or show error dialog
             }
         }
     }

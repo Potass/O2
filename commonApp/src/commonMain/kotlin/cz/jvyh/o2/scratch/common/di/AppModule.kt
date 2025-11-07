@@ -9,6 +9,8 @@ import cz.jvyh.o2.scratch.common.platform.activation.ActivationControllerImpl
 import cz.jvyh.o2.scratch.common.platform.activation.ActivationProcessor
 import cz.jvyh.o2.scratch.common.platform.main.MainController
 import cz.jvyh.o2.scratch.common.platform.main.MainControllerImpl
+import cz.jvyh.o2.scratch.common.platform.scratch.ScratchController
+import cz.jvyh.o2.scratch.common.platform.scratch.ScratchControllerImpl
 import cz.jvyh.o2.scratch.common.ui.AppContentViewModel
 import cz.jvyh.o2.scratch.common.ui.activation.ActivationViewModel
 import cz.jvyh.o2.scratch.common.ui.main.MainViewModel
@@ -41,10 +43,11 @@ internal val appModule = module {
     singleOf(::AppContentControllerImpl) { bind<AppContentController>() }
     viewModel { AppContentViewModel(get<Logger>().withClassNameTag<AppContentViewModel>(), get()) }
     // Main
-    viewModel { MainViewModel(get<Logger>().withClassNameTag<MainViewModel>()) }
+    viewModel { MainViewModel(get<Logger>().withClassNameTag<MainViewModel>(), get()) }
     singleOf(::MainControllerImpl) { bind<MainController>() }
     // Scratch
-    viewModel { ScratchViewModel(get<Logger>().withClassNameTag<ScratchViewModel>()) }
+    viewModel { ScratchViewModel(get<Logger>().withClassNameTag<ScratchViewModel>(), get()) }
+    singleOf(::ScratchControllerImpl) { bind<ScratchController>() }
     // Activation
     viewModel { ActivationViewModel(get<Logger>().withClassNameTag<ActivationViewModel>(), get()) }
     singleOf(::ActivationControllerImpl) { bind<ActivationController>() }
@@ -56,4 +59,5 @@ internal val appModule = module {
     single<AppDrawableResourceIconProvider> { AppDrawableResourceIconProviderImpl(get()) }
 }
 
+@Suppress("KotlinNoActualForExpect")
 expect val appPlatformModule: Module

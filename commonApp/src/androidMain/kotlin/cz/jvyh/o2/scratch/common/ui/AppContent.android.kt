@@ -19,9 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -42,6 +40,7 @@ import cz.jvyh.o2.scratch.shared.common.domain.InnerLevelAppDestinationToNavigat
 import cz.jvyh.o2.scratch.shared.common.domain.StringKey
 import cz.jvyh.o2.scratch.shared.common.domain.TopLevelAppDestinationToNavigate
 import cz.jvyh.o2.scratch.shared.common.infrastructure.doNothing
+import cz.jvyh.o2.scratch.shared.common.ui.composables.collectAsStateWithLifecycleMultiplatform
 import cz.jvyh.o2.scratch.shared.common.ui.destination.AppDestination
 import cz.jvyh.o2.scratch.shared.common.ui.resources.iconKeyResource
 import cz.jvyh.o2.scratch.shared.common.ui.resources.stringKeyResource
@@ -52,9 +51,7 @@ actual fun AppContent(
     viewModel: AppContentViewModel,
     logger: Logger,
 ) {
-    val state by viewModel.stateFlow.collectAsStateWithLifecycle()
-
-    val coroutineScope = rememberCoroutineScope()
+    val state by viewModel.stateFlow.collectAsStateWithLifecycleMultiplatform()
 
     PlatformAppTheme(
         darkTheme = isSystemInDarkTheme(),

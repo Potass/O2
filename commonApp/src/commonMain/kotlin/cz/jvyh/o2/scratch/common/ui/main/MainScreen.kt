@@ -17,7 +17,7 @@ import cz.jvyh.o2.scratch.shared.common.ui.resources.stringKeyResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun MainScreen(
+internal fun MainScreen(
     onScratchClicked: () -> Unit,
     onActivateClicked: () -> Unit,
     viewModel: MainViewModel = koinViewModel(),

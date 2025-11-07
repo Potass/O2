@@ -28,7 +28,7 @@ internal class ActivationProcessorImpl(
         client.get {
             url {
                 path(*PATH)
-                parameter("code", request.code)
+                parameter(CODE_PARAM_NAME, request.code)
             }
         }.body<ActivationResponseDto>().let(responseAdapter::toDomain)
     }.getOrNull()
@@ -36,5 +36,6 @@ internal class ActivationProcessorImpl(
     private companion object {
         const val HOST = "api.o2.sk"
         val PATH = arrayOf("version")
+        const val CODE_PARAM_NAME = "code"
     }
 }
