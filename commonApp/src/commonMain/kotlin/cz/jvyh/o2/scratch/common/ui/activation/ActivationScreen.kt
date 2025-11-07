@@ -16,7 +16,7 @@ import cz.jvyh.o2.scratch.shared.common.ui.resources.stringKeyResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ActivationScreen(
+internal fun ActivationScreen(
     viewModel: ActivationViewModel = koinViewModel(),
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -27,7 +27,7 @@ fun ActivationScreen(
             verticalArrangement = Arrangement.spacedBy(SpacingDimens.DefaultS)
         ) {
             Button(
-                onClick = {},
+                onClick = viewModel::onActivateClicked,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text(text = stringKeyResource(CommonStringKey.CommonLabelActivate))
