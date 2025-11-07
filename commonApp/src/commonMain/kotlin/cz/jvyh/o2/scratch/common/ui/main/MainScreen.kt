@@ -3,15 +3,19 @@ package cz.jvyh.o2.scratch.common.ui.main
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cz.jvyh.o2.scratch.shared.common.domain.CommonStringKey
+import cz.jvyh.o2.scratch.shared.common.ui.composables.collectAsStateWithLifecycleMultiplatform
 import cz.jvyh.o2.scratch.shared.common.ui.constants.SpacingDimens
 import cz.jvyh.o2.scratch.shared.common.ui.resources.stringKeyResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -22,6 +26,8 @@ internal fun MainScreen(
     onActivateClicked: () -> Unit,
     viewModel: MainViewModel = koinViewModel(),
 ) {
+    val state by viewModel.stateFlow.collectAsStateWithLifecycleMultiplatform()
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -31,19 +37,22 @@ internal fun MainScreen(
         ) {
             Card(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                 Text(
-                    text = "Inactive",
+                    text = stringKeyResource(state.stateLabel).uppercase(),
                     modifier = Modifier.padding(SpacingDimens.DefaultS)
                 )
             }
+            Spacer(modifier = Modifier.height(SpacingDimens.Default2))
             Button(
                 onClick = onScratchClicked,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                enabled = state.isScratchEnabled
             ) {
                 Text(text = stringKeyResource(CommonStringKey.CommonLabelScratch))
             }
             Button(
                 onClick = onActivateClicked,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                enabled = state.isActivationEnabled
             ) {
                 Text(text = stringKeyResource(CommonStringKey.CommonLabelActivate))
             }

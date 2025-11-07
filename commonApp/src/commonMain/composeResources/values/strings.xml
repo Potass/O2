@@ -3,12 +3,17 @@
     <string name="general__app_name">O2 Scratch app</string>
 
     <string name="common__label_activate">Activate</string>
+    <string name="common__label_activated">Activated</string>
     <string name="common__label_ok">OK</string>
     <string name="common__label_scratch">Scratch</string>
+    <string name="common__label_scratched">Scratched</string>
+    <string name="common__label_unscratched">Unscratched</string>
 
     <string name="main__destination_title">Main screen</string>
     <string name="scratch__destination_title">Scratch screen</string>
+
     <string name="activation__destination_title">Activation screen</string>
+    <string name="activation__dialog_msg_activation_failed">Could not activate the scratch card.</string>
 
     <string name="preview__destination_title">Preview</string>
 </resources>

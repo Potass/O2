@@ -1,5 +1,7 @@
 package cz.jvyh.o2.scratch.common.platform.scratch
 
-internal interface ScratchController {
+import cz.jvyh.o2.scratch.common.platform.shared.CodeValueProvider
+
+internal interface ScratchController : CodeValueProvider {
     suspend fun scratch(): String
 }

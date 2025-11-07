@@ -3,9 +3,13 @@ package cz.jvyh.o2.scratch.common.ui.resources
 import co.touchlab.kermit.Logger
 import cz.jvyh.o2.scratch.common.Res.string
 import cz.jvyh.o2.scratch.common.activation__destination_title
+import cz.jvyh.o2.scratch.common.activation__dialog_msg_activation_failed
 import cz.jvyh.o2.scratch.common.common__label_activate
+import cz.jvyh.o2.scratch.common.common__label_activated
 import cz.jvyh.o2.scratch.common.common__label_ok
 import cz.jvyh.o2.scratch.common.common__label_scratch
+import cz.jvyh.o2.scratch.common.common__label_scratched
+import cz.jvyh.o2.scratch.common.common__label_unscratched
 import cz.jvyh.o2.scratch.common.domain.AppStringKey
 import cz.jvyh.o2.scratch.common.general__app_name
 import cz.jvyh.o2.scratch.common.main__destination_title
@@ -32,12 +36,16 @@ class AppStringProviderImpl(
 
             busyIndicatorController.coWith {
                 strings[AppStringKey.ActivationDestinationTitle] = string.activation__destination_title.resolve()
+                strings[AppStringKey.ActivationDialogMsgActivationFailed] = string.activation__dialog_msg_activation_failed.resolve()
                 strings[AppStringKey.AppName] = string.general__app_name.resolve()
                 strings[AppStringKey.MainDestinationTitle] = string.main__destination_title.resolve()
                 strings[AppStringKey.ScratchDestinationTitle] = string.scratch__destination_title.resolve()
                 strings[CommonStringKey.CommonLabelActivate] = string.common__label_activate.resolve()
+                strings[CommonStringKey.CommonLabelActivated] = string.common__label_activated.resolve()
                 strings[CommonStringKey.CommonLabelOk] = string.common__label_ok.resolve()
                 strings[CommonStringKey.CommonLabelScratch] = string.common__label_scratch.resolve()
+                strings[CommonStringKey.CommonLabelScratched] = string.common__label_scratched.resolve()
+                strings[CommonStringKey.CommonLabelUnscratched] = string.common__label_unscratched.resolve()
                 strings[CommonStringKey.PreviewDestinationTitle] = string.preview__destination_title.resolve()
             }
         }

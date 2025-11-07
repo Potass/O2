@@ -13,7 +13,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cz.jvyh.o2.scratch.shared.common.domain.CommonStringKey
-import cz.jvyh.o2.scratch.shared.common.infrastructure.orDefault
 import cz.jvyh.o2.scratch.shared.common.ui.composables.collectAsStateWithLifecycleMultiplatform
 import cz.jvyh.o2.scratch.shared.common.ui.constants.SpacingDimens
 import cz.jvyh.o2.scratch.shared.common.ui.resources.stringKeyResource
@@ -42,7 +41,7 @@ internal fun ScratchScreen(
                 Text(text = stringKeyResource(CommonStringKey.CommonLabelScratch))
             }
             Text(
-                text = state.code.orDefault(),
+                text = state.code,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }

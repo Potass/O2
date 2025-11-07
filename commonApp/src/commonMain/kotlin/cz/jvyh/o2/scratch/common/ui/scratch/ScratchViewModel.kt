@@ -4,6 +4,7 @@ import androidx.compose.runtime.Immutable
 import co.touchlab.kermit.Logger
 import cz.jvyh.o2.scratch.common.platform.scratch.ScratchController
 import cz.jvyh.o2.scratch.common.ui.scratch.ScratchViewModel.State
+import cz.jvyh.o2.scratch.shared.common.infrastructure.StringDefaults
 import cz.jvyh.o2.scratch.shared.common.ui.viewmodel.BaseViewModel
 
 internal class ScratchViewModel(
@@ -12,10 +13,14 @@ internal class ScratchViewModel(
 ) : BaseViewModel<State>(logger) {
     override val initialState: State get() = State()
 
+    init {
+        updateState { s -> s.copy(code = controller.code) }
+    }
+
     suspend fun onScratchClicked() = controller.scratch().let { c -> updateState { s -> s.copy(code = c) } }
 
     @Immutable
     data class State(
-        val code: String? = null,
+        val code: String = StringDefaults.DEFAULT_VALUE,
     )
 }

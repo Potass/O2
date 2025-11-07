@@ -11,6 +11,10 @@ import cz.jvyh.o2.scratch.common.platform.main.MainController
 import cz.jvyh.o2.scratch.common.platform.main.MainControllerImpl
 import cz.jvyh.o2.scratch.common.platform.scratch.ScratchController
 import cz.jvyh.o2.scratch.common.platform.scratch.ScratchControllerImpl
+import cz.jvyh.o2.scratch.common.platform.shared.CodeFlowProvider
+import cz.jvyh.o2.scratch.common.platform.shared.CodeValueProvider
+import cz.jvyh.o2.scratch.common.platform.shared.IsActiveFlowProvider
+import cz.jvyh.o2.scratch.common.platform.shared.IsActiveValueProvider
 import cz.jvyh.o2.scratch.common.ui.AppContentViewModel
 import cz.jvyh.o2.scratch.common.ui.activation.ActivationViewModel
 import cz.jvyh.o2.scratch.common.ui.main.MainViewModel
@@ -41,10 +45,16 @@ val composePreviewAppModule = module {
     singleOf(::MainControllerImpl) { bind<MainController>() }
     // Scratch
     viewModel { ScratchViewModel(get<Logger>().withClassNameTag<ScratchViewModel>(), get()) }
-    singleOf(::ScratchControllerImpl) { bind<ScratchController>() }
+    single<ScratchControllerImpl> { ScratchControllerImpl(get()) }
+    single<ScratchController> { get<ScratchControllerImpl>() }
+    single<CodeValueProvider> { get<ScratchControllerImpl>() }
+    single<CodeFlowProvider> { get<ScratchControllerImpl>() }
     // Activation
     viewModelOf(::ActivationViewModel)
-    singleOf(::ActivationControllerImpl) { bind<ActivationController>() }
+    single<ActivationControllerImpl> { ActivationControllerImpl(get(), get(), get(), get()) }
+    single<ActivationController> { get<ActivationControllerImpl>() }
+    single<IsActiveValueProvider> { get<ActivationControllerImpl>() }
+    single<IsActiveFlowProvider> { get<ActivationControllerImpl>() }
     factoryOf(::ActivationProcessorImpl) { bind<ActivationProcessor>() }
     // Resources
     single<CommonDrawableResourceIconProvider> { CommonDrawableResourceIconProviderImpl() }
