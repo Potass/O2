@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-// TODO O2 - unit tests
 internal class ActivationControllerImpl(
     dispatcherProvider: DispatcherProvider,
     private val processor: ActivationProcessor,
@@ -25,10 +24,11 @@ internal class ActivationControllerImpl(
     private val codeValueProvider: CodeValueProvider,
     private val dialogToShowUpdater: DialogToShowUpdater,
 ) : ActivationController, CoroutineScope, IsActiveFlowProvider, IsActiveValueProvider {
+    override val coroutineContext: CoroutineContext = SupervisorJob() + dispatcherProvider.io()
+
     private val _isActiveFlow = MutableStateFlow(BooleanDefaults.DEFAULT_VALUE)
     override val isActiveFlow: Flow<Boolean> = _isActiveFlow
     override val isActive: Boolean get() = _isActiveFlow.value
-    override val coroutineContext: CoroutineContext = SupervisorJob() + dispatcherProvider.io()
 
     override fun activate() {
         launch {
