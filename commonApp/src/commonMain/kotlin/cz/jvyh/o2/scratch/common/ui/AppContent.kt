@@ -47,6 +47,7 @@ fun InitAppContent(
     if (isLoaded) onAfterInit()
 }
 
+@Suppress("KotlinNoActualForExpect")
 @Composable
 expect fun AppContent(
     viewModel: AppContentViewModel = koinViewModel(),

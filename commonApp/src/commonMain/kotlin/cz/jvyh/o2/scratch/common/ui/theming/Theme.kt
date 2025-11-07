@@ -241,7 +241,7 @@ internal fun CommonAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     customColorSchemeProvider: (@Composable () -> ColorScheme)? = null,
     contrastLevel: ContrastLevel = ContrastLevel.Standard,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         customColorSchemeProvider != null -> customColorSchemeProvider()
@@ -261,11 +261,12 @@ internal fun CommonAppTheme(
     )
 }
 
+@Suppress("KotlinNoActualForExpect")
 @Composable
 expect fun PlatformAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available only on Android, from version 12; ignored on other platforms.
     dynamicColor: Boolean = true,
     contrastLevel: ContrastLevel = ContrastLevel.Standard,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 )

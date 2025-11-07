@@ -1,3 +1,5 @@
+@file:Suppress("KotlinNoActualForExpect")
+
 package cz.jvyh.o2.scratch.shared.networking.di
 
 import io.ktor.client.HttpClient
