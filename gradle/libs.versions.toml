@@ -1,33 +1,36 @@
 [versions]
 activityCompose = "1.11.0"
 agp = "8.13.0"
+#noinspection UnusedVersionCatalogEntry
 androidCompileSdk = "36"
+#noinspection UnusedVersionCatalogEntry
 androidMinSdk = "29"
+#noinspection UnusedVersionCatalogEntry
 androidTargetSdk = "36"
+#noinspection UnusedVersionCatalogEntry
 appNamespace = "cz.jvyh.o2.scratch"
+#noinspection UnusedVersionCatalogEntry
 appVersionCode = "1"
+#noinspection UnusedVersionCatalogEntry
 appVersionName = "1.0.0"
-composeMultiplatform = "1.9.0-alpha03"
-coreKtx = "1.17.0"
+composeMultiplatform = "1.9.3"
 kermit = "2.0.8"
 koin = "4.1.1"
-kotest = "6.0.3"
-kotlin = "2.2.20"
+kotest = "6.0.4"
+kotlin = "2.2.21"
 kotlinxCoroutines = "1.10.2"
-ktor = "3.3.0" # 3.2.0 introduced "com.android.tools.r8.internal.Qf: Space characters in SimpleName 'use streaming syntax' are not allowed prior to DEX version 040"
+ktor = "3.3.2"
 lifecycle = "2.9.4"
+lifecycleJetbrains = "2.9.6"
 mockk = "1.14.6"
-navigation = "2.9.0"
-slf4j = "2.0.17"
+navigation = "2.9.1"
+#slf4j = "2.0.17"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
-androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
-androidx-lifecycle-runtime = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
-androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-lifecycle-runtime = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycleJetbrains" }
+androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleJetbrains" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" } # no jetbrains variant
-androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
-androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 androidx-navigation-common = { module = "org.jetbrains.androidx.navigation:navigation-common", version.ref = "navigation" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 androidx-navigation-runtime = { module = "org.jetbrains.androidx.navigation:navigation-runtime", version.ref = "navigation" }
@@ -46,11 +49,10 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation" }
 ktor-client-core = { module = "io.ktor:ktor-client-core" }
-ktor-client-java = { module = "io.ktor:ktor-client-java" } # JVM, supports both HTTP/2 and WebSockets
 ktor-client-logging = { module = "io.ktor:ktor-client-logging" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp" } # JVM/Android engine, supports both HTTP/2 and WebSockets
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json" }
-slf4j-nop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" }
+#slf4j-nop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Use if you want to avoid 'No SLF4J providers were found.' in logs.
 # Tests
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" } # Base testing framework
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" } # Expressive assertions framework
@@ -74,15 +76,6 @@ ktor-common = [
     "ktor-client-core",
     "ktor-client-logging",
     "ktor-serialization-kotlinx-json"
-]
-lifecycle-common = [
-    "androidx-lifecycle-runtime",
-    "androidx-lifecycle-viewmodel"
-]
-lifecycle-android = [
-    "androidx-lifecycle-runtime-compose",
-    "androidx-lifecycle-runtime-ktx",
-    "androidx-lifecycle-viewmodel-compose"
 ]
 navigation-common = [
     "androidx-navigation-common",
