@@ -20,7 +20,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,12 +33,8 @@ import cz.jvyh.o2.scratch.common.ui.main.MainScreen
 import cz.jvyh.o2.scratch.common.ui.scratch.ScratchDestination
 import cz.jvyh.o2.scratch.common.ui.scratch.ScratchScreen
 import cz.jvyh.o2.scratch.common.ui.theming.PlatformAppTheme
-import cz.jvyh.o2.scratch.shared.common.domain.AutoLevelAppDestinationToNavigate
 import cz.jvyh.o2.scratch.shared.common.domain.CommonImageVectorIconKey
-import cz.jvyh.o2.scratch.shared.common.domain.InnerLevelAppDestinationToNavigate
 import cz.jvyh.o2.scratch.shared.common.domain.StringKey
-import cz.jvyh.o2.scratch.shared.common.domain.TopLevelAppDestinationToNavigate
-import cz.jvyh.o2.scratch.shared.common.infrastructure.doNothing
 import cz.jvyh.o2.scratch.shared.common.ui.composables.collectAsStateWithLifecycleMultiplatform
 import cz.jvyh.o2.scratch.shared.common.ui.destination.AppDestination
 import cz.jvyh.o2.scratch.shared.common.ui.resources.iconKeyResource
@@ -115,26 +110,6 @@ actual fun AppContent(
                         }
                     }
                 }
-
-                runCatching {
-                    when (val destinationToNavigate = state.destinationToNavigate) {
-                        is TopLevelAppDestinationToNavigate -> navController.navigateSingleTopTo(route = destinationToNavigate.destination.route)
-                        is InnerLevelAppDestinationToNavigate -> navController.navigate(route = destinationToNavigate.destination.route)
-                        is AutoLevelAppDestinationToNavigate -> {
-                            if (navController.previousBackStackEntry != null) {
-                                navController.navigate(route = destinationToNavigate.innerLevelDestination.route)
-                            } else {
-                                navController.navigateSingleTopTo(route = destinationToNavigate.topLevelDestination.route)
-                            }
-                        }
-                        else -> doNothing()
-                    }
-                    // Invalidate destination to avoid its reuse on config change (e.g. orientation).
-                    viewModel.invalidateDestinationToNavigate()
-                }.onFailure {
-                    logger.e(it) { "Failed to navigate to destination: ${state.destinationToNavigate}" }
-                    viewModel.invalidateDestinationToNavigate()
-                }
             }
         }
     }
@@ -154,19 +129,6 @@ private fun NavigationIcon(
         }
     }
 }
-
-private fun NavHostController.navigateSingleTopTo(route: String, shouldRestoreState: Boolean = true) = navigate(route) {
-    // Pop up to the start destination of the graph to avoid building up a large stack of destinations on the back stack as users select items.
-    popUpTo(this@navigateSingleTopTo.graph.findStartDestination().id) {
-        saveState = true
-    }
-    // Avoid multiple copies of the same destination when re-selecting the same item.
-    launchSingleTop = true
-    // Restore state when re-selecting a previously selected item.
-    restoreState = shouldRestoreState
-}
-
-private fun NavHostController.navigateToStart() = popBackStack(Destinations.default.route, inclusive = false)
 
 private object Destinations {
     val default = MainDestination

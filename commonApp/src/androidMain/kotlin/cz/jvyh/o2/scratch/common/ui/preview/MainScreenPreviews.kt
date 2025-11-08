@@ -13,7 +13,7 @@ import cz.jvyh.o2.scratch.shared.common.ui.theming.ContrastLevel
 @Composable
 fun BaseMainScreenPreview() {
     Surface {
-        KoinAwarePreview(composePreviewAppModule) {
+        KoinAwarePreview(composePreviewAppPlatformModule) {
             MainScreen({}, {})
         }
     }

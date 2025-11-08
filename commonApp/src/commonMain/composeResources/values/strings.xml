@@ -14,6 +14,4 @@
 
     <string name="activation__destination_title">Activation screen</string>
     <string name="activation__dialog_msg_activation_failed">Could not activate the scratch card.</string>
-
-    <string name="preview__destination_title">Preview</string>
 </resources>

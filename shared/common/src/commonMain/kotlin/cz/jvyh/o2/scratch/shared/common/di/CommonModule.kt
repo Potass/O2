@@ -2,9 +2,6 @@ package cz.jvyh.o2.scratch.shared.common.di
 
 import cz.jvyh.o2.scratch.shared.common.infrastructure.DefaultDispatcherProvider
 import cz.jvyh.o2.scratch.shared.common.infrastructure.DispatcherProvider
-import cz.jvyh.o2.scratch.shared.common.platform.AppDestinationToNavigateControllerImpl
-import cz.jvyh.o2.scratch.shared.common.platform.AppDestinationToNavigateProvider
-import cz.jvyh.o2.scratch.shared.common.platform.AppDestinationToNavigateUpdater
 import cz.jvyh.o2.scratch.shared.common.platform.BusyIndicatorController
 import cz.jvyh.o2.scratch.shared.common.platform.BusyIndicatorControllerImpl
 import cz.jvyh.o2.scratch.shared.common.platform.BusyIndicatorInvalidator
@@ -21,9 +18,6 @@ val commonModule = module {
         loggingModule
     )
 
-    single<AppDestinationToNavigateControllerImpl> { AppDestinationToNavigateControllerImpl() }
-    single<AppDestinationToNavigateProvider> { get<AppDestinationToNavigateControllerImpl>() }
-    single<AppDestinationToNavigateUpdater> { get<AppDestinationToNavigateControllerImpl>() }
     single<BusyIndicatorControllerImpl> { BusyIndicatorControllerImpl() }
     single<BusyIndicatorController> { get<BusyIndicatorControllerImpl>() }
     single<BusyIndicatorVisibilityProvider> { get<BusyIndicatorControllerImpl>() }

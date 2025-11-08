@@ -7,5 +7,4 @@ sealed interface CommonStringKey : StringKey {
     data object CommonLabelScratch : CommonStringKey
     data object CommonLabelScratched : CommonStringKey
     data object CommonLabelUnscratched : CommonStringKey
-    data object PreviewDestinationTitle : CommonStringKey
 }

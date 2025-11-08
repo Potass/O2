@@ -13,7 +13,6 @@ import cz.jvyh.o2.scratch.common.common__label_unscratched
 import cz.jvyh.o2.scratch.common.domain.AppStringKey
 import cz.jvyh.o2.scratch.common.general__app_name
 import cz.jvyh.o2.scratch.common.main__destination_title
-import cz.jvyh.o2.scratch.common.preview__destination_title
 import cz.jvyh.o2.scratch.common.scratch__destination_title
 import cz.jvyh.o2.scratch.shared.common.domain.CommonStringKey
 import cz.jvyh.o2.scratch.shared.common.domain.StringKey
@@ -46,7 +45,6 @@ class AppStringProviderImpl(
                 strings[CommonStringKey.CommonLabelScratch] = string.common__label_scratch.resolve()
                 strings[CommonStringKey.CommonLabelScratched] = string.common__label_scratched.resolve()
                 strings[CommonStringKey.CommonLabelUnscratched] = string.common__label_unscratched.resolve()
-                strings[CommonStringKey.PreviewDestinationTitle] = string.preview__destination_title.resolve()
             }
         }
     }
