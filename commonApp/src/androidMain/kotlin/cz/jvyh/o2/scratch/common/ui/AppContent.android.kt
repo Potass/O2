@@ -5,6 +5,7 @@ package cz.jvyh.o2.scratch.common.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -26,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
+import cz.jvyh.o2.scratch.common.domain.AppStringKey
 import cz.jvyh.o2.scratch.common.ui.activation.ActivationDestination
 import cz.jvyh.o2.scratch.common.ui.activation.ActivationScreen
 import cz.jvyh.o2.scratch.common.ui.main.MainDestination
@@ -89,24 +92,33 @@ actual fun AppContent(
                             .fillMaxSize()
                             .padding(innerPadding)
                     ) {
-                        NavHost(
-                            navController = navController,
-                            startDestination = Destinations.default.route
-                        ) {
-                            composable(route = MainDestination.route) {
-                                MainScreen(
-                                    onScratchClicked = { navController.navigate(route = ScratchDestination.route) },
-                                    onActivateClicked = { navController.navigate(route = ActivationDestination.route) }
-                                )
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            NavHost(
+                                navController = navController,
+                                startDestination = Destinations.default.route,
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                composable(route = MainDestination.route) {
+                                    MainScreen(
+                                        onScratchClicked = { navController.navigate(route = ScratchDestination.route) },
+                                        onActivateClicked = { navController.navigate(route = ActivationDestination.route) }
+                                    )
+                                }
+
+                                composable(route = ScratchDestination.route) {
+                                    ScratchScreen()
+                                }
+
+                                composable(route = ActivationDestination.route) {
+                                    ActivationScreen()
+                                }
                             }
 
-                            composable(route = ScratchDestination.route) {
-                                ScratchScreen()
-                            }
-
-                            composable(route = ActivationDestination.route) {
-                                ActivationScreen()
-                            }
+                            Text(
+                                text = stringKeyResource(AppStringKey.Copyright),
+                                style = MaterialTheme.typography.labelSmall,
+                                modifier = Modifier.align(Alignment.CenterHorizontally),
+                            )
                         }
                     }
                 }

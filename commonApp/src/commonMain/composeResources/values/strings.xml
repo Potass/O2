@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="general__app_name">O2 Scratch app</string>
+    <string name="general__copyright">© 2025 Jan Vyhnánek</string>
 
     <string name="common__label_activate">Activate</string>
     <string name="common__label_activated">Activated</string>

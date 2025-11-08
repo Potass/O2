@@ -1,5 +1,6 @@
 package cz.jvyh.o2.scratch.common.ui.main
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cz.jvyh.o2.scratch.shared.common.domain.CommonStringKey
 import cz.jvyh.o2.scratch.shared.common.ui.composables.collectAsStateWithLifecycleMultiplatform
+import cz.jvyh.o2.scratch.shared.common.ui.constants.BasicDimens
 import cz.jvyh.o2.scratch.shared.common.ui.constants.SpacingDimens
 import cz.jvyh.o2.scratch.shared.common.ui.resources.stringKeyResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -35,7 +37,10 @@ internal fun MainScreen(
                 .align(Alignment.Center),
             verticalArrangement = Arrangement.spacedBy(SpacingDimens.DefaultS)
         ) {
-            Card(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+            Card(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                border = BorderStroke(BasicDimens.Unit0_1_8, state.stateColor)
+            ) {
                 Text(
                     text = stringKeyResource(state.stateLabel).uppercase(),
                     modifier = Modifier.padding(SpacingDimens.DefaultS)
