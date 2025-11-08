@@ -26,6 +26,7 @@ internal class ActivationControllerImpl(
 ) : ActivationController, CoroutineScope, IsActiveFlowProvider, IsActiveValueProvider {
     override val coroutineContext: CoroutineContext = SupervisorJob() + dispatcherProvider.io()
 
+    @Suppress("KotlinConstantConditions")
     private val _isActiveFlow = MutableStateFlow(BooleanDefaults.DEFAULT_VALUE)
     override val isActiveFlow: Flow<Boolean> = _isActiveFlow
     override val isActive: Boolean get() = _isActiveFlow.value

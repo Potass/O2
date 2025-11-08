@@ -14,8 +14,6 @@ import kotlinx.coroutines.test.setMain
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class BusyIndicatorControllerImplTest {
@@ -169,8 +167,8 @@ internal class BusyIndicatorControllerImplTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         collectedItems shouldBe listOf(true, false)
+        result shouldBe any
         collectJob.cancel()
-        assertEquals(any, result)
     }
 
     @Test
@@ -182,8 +180,8 @@ internal class BusyIndicatorControllerImplTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         collectedItems shouldBe listOf(true, false)
+        result shouldBe any
         collectJob.cancel()
-        assertEquals(any, result)
     }
 
     @Test
@@ -196,8 +194,8 @@ internal class BusyIndicatorControllerImplTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         collectedItems shouldBe listOf(true, false)
+        wasExceptionCaught shouldBe true
         collectJob.cancel()
-        assertTrue(wasExceptionCaught)
     }
 
     @Test
@@ -210,7 +208,7 @@ internal class BusyIndicatorControllerImplTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         collectedItems shouldBe listOf(true, false)
+        wasExceptionCaught shouldBe true
         collectJob.cancel()
-        assertTrue(wasExceptionCaught)
     }
 }
